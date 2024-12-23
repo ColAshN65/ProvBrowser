@@ -1,0 +1,27 @@
+﻿<Window x:Class="ProvBrowser.View.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProvBrowser.View"
+        xmlns:ns="clr-namespace:ProvBrowser.Utilities"
+        xmlns:nav="clr-namespace:MVVM.Core.Locators;assembly=MVVM.Core"
+        
+        xmlns:vm="clr-namespace:ProvBrowser.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Style="{DynamicResource windowStandart}" BorderThickness="0">
+    
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <local:Header x:Name="MainHeader"/>
+
+        <Grid Grid.Row="1" DataContext="{Binding MainContent}">
+            <UserControl Content="{Binding View}"/>
+        </Grid>
+    </Grid>
+</Window>
