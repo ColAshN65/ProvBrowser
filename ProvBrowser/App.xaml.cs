@@ -8,6 +8,8 @@ using System.Windows;
 using CefSharp;
 using CefSharp.Wpf;
 using MVVM.Core.Locators;
+using ProvBrowser.View.Windows;
+using ProvBrowser.ViewModel.Windows;
 
 namespace ProvBrowser
 {
@@ -20,7 +22,7 @@ namespace ProvBrowser
         {
             //ViewLocator.UseSettings(new LocatorSettings("ProvBrowser.View", "ProvBrowser.ViewModel", "View", "ViewModel"));
         }
-        private MainWindowView Window { get; set; }
+        private MainWindow Window { get; set; }
         public MainWindowViewModel MainViewModel { get; set; }
 
 
@@ -29,7 +31,7 @@ namespace ProvBrowser
         {
             base.OnStartup(e);
             MainViewModel = new MainWindowViewModel();
-            Window = new MainWindowView { DataContext = MainViewModel };
+            Window = new MainWindow { DataContext = MainViewModel };
             Window.Show();
         }
 

@@ -2,6 +2,7 @@
 using MVVM.Core.ViewModel.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace ProvBrowser.Utilities
 {
     public class VmContainer : BaseNotifyPropertyChanged
     {
-        public SimpleViewModel ViewModel
+        public INotifyPropertyChanged ViewModel
         {
             get => _viewModel;
             set => Set(ref _viewModel, value);
@@ -23,10 +24,10 @@ namespace ProvBrowser.Utilities
             set => Set(ref _view, value);
         }
 
-        private SimpleViewModel _viewModel;
+        private INotifyPropertyChanged _viewModel;
         private Control _view;
         
-        public VmContainer(Control control, SimpleViewModel viewModel)
+        public VmContainer(Control control, INotifyPropertyChanged viewModel)
         {
             View = control;
             ViewModel = viewModel;

@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace ProvBrowser.Utilities
 {
     public class VmContainerCollection
     {
-        private ObservableCollection<SimpleViewModel> ViewModels { get; set; } =  new ObservableCollection<SimpleViewModel>();
+        private ObservableCollection<INotifyPropertyChanged> ViewModels { get; set; } =  new ObservableCollection<INotifyPropertyChanged>();
 
         public ObservableCollection<Control> Views { get; set; } = new ObservableCollection<Control>();
 

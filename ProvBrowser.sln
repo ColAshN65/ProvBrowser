@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProvBrowser", "ProvBrowser\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.Core", "MVVM.Core\MVVM.Core.csproj", "{337DCBF4-EFDE-4619-BB61-68267B15F004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfLibrary", "WpfLibrary\WpfLibrary.csproj", "{D7AFD000-AFA1-4713-BBC6-BE6BA70E1873}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfLibrary", "WpfLibrary\WpfLibrary.csproj", "{D7AFD000-AFA1-4713-BBC6-BE6BA70E1873}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrowserCore", "BrowserCore\BrowserCore.csproj", "{939B1994-4360-4A11-B884-136D45611484}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D7AFD000-AFA1-4713-BBC6-BE6BA70E1873}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7AFD000-AFA1-4713-BBC6-BE6BA70E1873}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7AFD000-AFA1-4713-BBC6-BE6BA70E1873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{939B1994-4360-4A11-B884-136D45611484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{939B1994-4360-4A11-B884-136D45611484}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{939B1994-4360-4A11-B884-136D45611484}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{939B1994-4360-4A11-B884-136D45611484}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

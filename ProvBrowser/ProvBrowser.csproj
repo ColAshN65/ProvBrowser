@@ -16,14 +16,19 @@
 
   <ItemGroup>
     <PackageReference Include="CefSharp.Wpf.NETCore" Version="131.3.10" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BrowserCore\BrowserCore.csproj" />
     <ProjectReference Include="..\MVVM.Core\MVVM.Core.csproj" />
     <ProjectReference Include="..\WpfLibrary\WpfLibrary.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModel\Controls\" />
+    <Folder Include="ViewModel\Backing\" />
+    <Folder Include="View\Controls\" />
     <Folder Include="WebCore\" />
   </ItemGroup>
 

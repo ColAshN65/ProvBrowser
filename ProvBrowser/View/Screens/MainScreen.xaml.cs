@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProvBrowser.View
+namespace ProvBrowser.View.Screens
 {
     /// <summary>
-    /// Логика взаимодействия для TabBrowswer.xaml
+    /// Логика взаимодействия для MainScreen.xaml
     /// </summary>
-    public partial class TabBrowswerView : UserControl
+    public partial class MainScreen : UserControl
     {
-        public TabBrowswerView()
+        public MainScreen()
         {
             InitializeComponent();
         }

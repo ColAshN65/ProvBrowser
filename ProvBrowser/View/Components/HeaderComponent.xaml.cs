@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProvBrowser.View.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,15 +14,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProvBrowser.View
+namespace ProvBrowser.View.Components
 {
     /// <summary>
     /// Логика взаимодействия для Header.xaml
     /// </summary>
-    public partial class Header : UserControl
+    public partial class HeaderComponent : UserControl
     {
         public Window ParentWindow { get; set; }
-        public Header()
+        public HeaderComponent()
         {
             InitializeComponent();
         }
@@ -35,7 +36,7 @@ namespace ProvBrowser.View
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            if (ParentWindow is MainWindowView)
+            if (ParentWindow is MainWindow)
                 Application.Current.Shutdown();
             ParentWindow.Close();
 

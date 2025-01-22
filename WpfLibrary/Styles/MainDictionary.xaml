@@ -90,6 +90,7 @@
 
     <Style x:Key="btnControl" TargetType="Button" BasedOn="{StaticResource btnBase}">
 
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -166,7 +167,6 @@
     </Style>
     
     
-   
 
 
 
