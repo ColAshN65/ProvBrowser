@@ -15,8 +15,7 @@ using System.Windows;
 
 namespace ProvBrowser.ViewModel;
 
-[INotifyPropertyChanged]
-public partial class BrowserItemComponentViewModel
+public partial class BrowserItemComponentViewModel : ObservableObject
 {
     [ObservableProperty]
     private string? title;

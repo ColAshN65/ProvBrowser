@@ -15,8 +15,7 @@ using System.Windows.Controls;
 
 namespace ProvBrowser.ViewModel.Components;
 
-[INotifyPropertyChanged]
-public partial class BrowsersTabComponentViewModel
+public partial class BrowsersTabComponentViewModel : ObservableObject
 {
     [ObservableProperty]
     public ObservableCollection<VmContainer> test = new ObservableCollection<VmContainer>();
@@ -33,18 +32,5 @@ public partial class BrowsersTabComponentViewModel
                 new BrowserItemComponent(),
                 new BrowserItemComponentViewModel("https://www.google.ru/?hl=ru")));
 
-    }
-}
-
-
-[ObservableObject]
-public partial class ViewModel
-{
-    [ObservableProperty]
-    private int _value;
-
-    public ViewModel()
-    {
-        Value = 100;
     }
 }

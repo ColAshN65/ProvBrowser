@@ -12,8 +12,7 @@ using System.Windows.Controls;
 
 namespace ProvBrowser.ViewModel.Screens;
 
-[INotifyPropertyChanged]
-public partial class MainScreenViewModel
+public partial class MainScreenViewModel : ObservableObject
 {
     [ObservableProperty]
     private VmContainer? _mainContent;

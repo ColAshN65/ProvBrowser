@@ -18,9 +18,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace ProvBrowser.ViewModel.Windows;
-
-[INotifyPropertyChanged]
-public partial class MainWindowViewModel
+public partial class MainWindowViewModel : ObservableObject
 {
     [ObservableProperty]
     private VmContainer _screen;
