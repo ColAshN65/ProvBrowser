@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using BrowserCore.Eventargs;
+using BrowserCore.Handlers;
+using CommunityToolkit.Mvvm.ComponentModel;
 using MVVM.Core.Commands.Base;
 using MVVM.Core.ViewModel;
 using MVVM.Core.ViewModel.Base;
@@ -17,8 +19,7 @@ namespace ProvBrowser.ViewModel.Components;
 
 public partial class BrowsersTabComponentViewModel : ObservableObject
 {
-    [ObservableProperty]
-    public ObservableCollection<VmContainer> test = new ObservableCollection<VmContainer>();
+    private CustomLifeSpanHandler lifeSpanHandler = new CustomLifeSpanHandler();
 
     [ObservableProperty]
     public VmContainerCollection browsersCollection = new VmContainerCollection();
@@ -26,11 +27,30 @@ public partial class BrowsersTabComponentViewModel : ObservableObject
     {
         BrowsersCollection.AddContainer(new VmContainer(
                 new BrowserItemComponent(),
-                new BrowserItemComponentViewModel("https://www.google.ru/?hl=ru")));
+                new BrowserItemComponentViewModel("https://www.google.ru/?hl=ru", lifeSpanHandler)));
 
-        Test.Add(new VmContainer(
+        BrowsersCollection.CollectionChanged += BrowserCollectionChanged;
+
+
+
+        lifeSpanHandler.Popup += OnBrowserLinked;
+        /*Test.Add(new VmContainer(
                 new BrowserItemComponent(),
-                new BrowserItemComponentViewModel("https://www.google.ru/?hl=ru")));
+                new BrowserItemComponentViewModel("https://www.google.ru/?hl=ru")));*/
 
+    }
+
+    private void BrowserCollectionChanged(object? sender, EventArgs e)
+    {
+        //((BrowserItemComponent)BrowsersCollection.Views.Last()).Linked
+
+        ((BrowserItemComponentViewModel)BrowsersCollection.ViewModels.Last()).Linked += OnBrowserLinked;
+    }
+
+    private void OnBrowserLinked(object? sender, LinkedEventArgs e)
+    {
+        BrowsersCollection.AddContainer(new VmContainer(
+                new BrowserItemComponent(),
+                new BrowserItemComponentViewModel(e.NewUrl, lifeSpanHandler)));
     }
 }

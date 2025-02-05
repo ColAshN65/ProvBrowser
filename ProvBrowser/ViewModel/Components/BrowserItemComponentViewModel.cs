@@ -1,4 +1,5 @@
-﻿using BrowserCore.Handlers;
+﻿using BrowserCore.Eventargs;
+using BrowserCore.Handlers;
 using CefSharp;
 using CefSharp.Wpf;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -18,19 +19,44 @@ namespace ProvBrowser.ViewModel;
 public partial class BrowserItemComponentViewModel : ObservableObject
 {
     [ObservableProperty]
-    private string? title;
+    private string? _title;
 
 
     [ObservableProperty]
-    private string? url;
+    private string? _url;
 
-    [ObservableProperty]
-    private IWpfWebBrowser webBrowser;
+    //[ObservableProperty]
 
+    private IWpfWebBrowser _webBrowser;
+
+    public IWpfWebBrowser WebBrowser
+    {
+        get => _webBrowser;
+        set
+        {
+            if (value is not null)
+            {
+                /*CustomLifeSpanHandler lifespanHandler = new CustomLifeSpanHandler();
+                lifespanHandler.Popup += Linked;*/
+                value.LifeSpanHandler = mainLifeSpanHandler;
+            }
+
+            _webBrowser = value;
+            OnPropertyChanged();
+
+            
+        }
+    }
+
+    private CustomLifeSpanHandler mainLifeSpanHandler = new CustomLifeSpanHandler();
     public BrowserItemComponentViewModel(string url)
     {
         Url = url;
-
+    }
+    public BrowserItemComponentViewModel(string url, CustomLifeSpanHandler lifeSpanHandler)
+    {
+        Url = url;
+        mainLifeSpanHandler = lifeSpanHandler;
     }
 
     public BaseCommand TestCommand
@@ -41,4 +67,6 @@ public partial class BrowserItemComponentViewModel : ObservableObject
 
         });
     }
+
+    public event EventHandler<LinkedEventArgs> Linked;
 }

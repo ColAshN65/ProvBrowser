@@ -1,4 +1,5 @@
-﻿using MVVM.Core.ViewModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MVVM.Core.ViewModel;
 using MVVM.Core.ViewModel.Base;
 using System;
 using System.Collections;
@@ -12,14 +13,19 @@ using System.Windows.Controls;
 
 namespace ProvBrowser.Utilities
 {
-    public class VmContainerCollection
+    public partial class VmContainerCollection : ObservableObject
     {
-        private ObservableCollection<INotifyPropertyChanged> ViewModels { get; set; } =  new ObservableCollection<INotifyPropertyChanged>();
+        [ObservableProperty]
+        public ObservableCollection<INotifyPropertyChanged> _viewModels;
 
-        public ObservableCollection<Control> Views { get; set; } = new ObservableCollection<Control>();
+        [ObservableProperty]
+        public ObservableCollection<Control> _views;
 
         public VmContainerCollection(List<VmContainer> vmContainers = null)
         {
+            ViewModels = new ObservableCollection<INotifyPropertyChanged>();
+            Views = new ObservableCollection<Control>();
+
             if (vmContainers != null)
             {
                 foreach (var vmContainer in vmContainers)
@@ -33,6 +39,10 @@ namespace ProvBrowser.Utilities
         {
             ViewModels.Add(vmContainer.ViewModel);
             Views.Add(vmContainer.View);
+
+            CollectionChanged?.Invoke(this, EventArgs.Empty);
         }
+
+        public event EventHandler CollectionChanged;
     }
 }
