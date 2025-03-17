@@ -23,10 +23,10 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private VmContainer _screen;
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(MainScreenViewModel mainScreenViewModel)
     {
         Screen = new VmContainer(
             new MainScreen(),
-            new MainScreenViewModel());
+            mainScreenViewModel);
     }
 }

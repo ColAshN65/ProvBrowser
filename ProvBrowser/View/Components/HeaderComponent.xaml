@@ -18,20 +18,20 @@
             <TextBlock DockPanel.Dock="Left"
                        x:Name="HeaderText"
                        Margin="10,0,0,0"
-                       Style="{DynamicResource tbkStandart}">
+                       Style="{StaticResource tbkBase}">
 
             </TextBlock>
         </Border>
         
         <Button x:Name="btnHide"
                 Grid.Column="1"
-                Style="{DynamicResource btnHide}"
+                Style="{StaticResource btnHide}"
                 Click="btnHide_Click"
                 Content="–" FontSize="18"/>
         
         <Button x:Name="btnClose"
                 Grid.Column="2"
-                Style="{DynamicResource btnClose}"
+                Style="{StaticResource btnClose}"
                 Click="btnClose_Click"
                 >X</Button>
         

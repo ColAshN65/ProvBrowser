@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+
+    <SolidColorBrush x:Key="MainForegroundColor" Color="White"/>
+    <SolidColorBrush x:Key="InteractiveForegroundColor" Color="#3f51b5"/>
+
+
+    <SolidColorBrush x:Key="FirstBackfroundColor" Color="#FF1E1E1E"/>
+    <SolidColorBrush x:Key="SecondBackfroundColor" Color="#FF2E2E2E"/>
+    <SolidColorBrush x:Key="EffectBackfroundColor" Color="#01041a"/>
+
+
+
+
+</ResourceDictionary>

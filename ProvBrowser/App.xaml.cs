@@ -1,40 +1,38 @@
-﻿using ProvBrowser.View;
-using ProvBrowser.ViewModel;
-using System.Configuration;
-using System.Data;
-using System.Runtime.CompilerServices;
-using System.Runtime.ConstrainedExecution;
-using System.Windows;
-using CefSharp;
-using CefSharp.Wpf;
-using MVVM.Core.Locators;
+﻿using CefSharp;
 using ProvBrowser.View.Windows;
 using ProvBrowser.ViewModel.Windows;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
-namespace ProvBrowser
+namespace ProvBrowser;
+
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    private MainWindowViewModel mainViewModel;
+    private MainWindow mainWindow;
+
+
+    public void Initialize(MainWindowViewModel mainViewModel)
     {
-        static App()
-        {
-            //ViewLocator.UseSettings(new LocatorSettings("ProvBrowser.View", "ProvBrowser.ViewModel", "View", "ViewModel"));
-        }
-        private MainWindow Window { get; set; }
-        public MainWindowViewModel MainViewModel { get; set; }
-
-
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-            MainViewModel = new MainWindowViewModel();
-            Window = new MainWindow { DataContext = MainViewModel };
-            Window.Show();
-        }
-
+        this.mainWindow = new MainWindow();
+        mainWindow.DataContext = mainViewModel;
+    }
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        mainWindow.Show();  // отображаем главное окно на экране
+        base.OnStartup(e);
     }
 
+    /*void LoadResources()
+    {
+        this.Resources = new ResourceDictionary();
+
+        this.Resources.MergedDictionaries.Add(
+            new ResourceDictionary()
+            { Source = new Uri("pack://application:,,,/WpfLibrary;component/Styles/MainDictionary.xaml") });
+    }*/
 }

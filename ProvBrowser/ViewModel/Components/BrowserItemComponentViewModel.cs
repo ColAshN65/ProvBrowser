@@ -1,72 +1,104 @@
 ﻿using BrowserCore.Eventargs;
-using BrowserCore.Handlers;
 using CefSharp;
 using CefSharp.Wpf;
 using CommunityToolkit.Mvvm.ComponentModel;
-using MVVM.Core.Commands.Base;
-using MVVM.Core.ViewModel;
-using MVVM.Core.ViewModel.Base;
-using ProvBrowser.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using CommunityToolkit.Mvvm.Input;
+using ProvBrowser.Model.Browser;
 
 namespace ProvBrowser.ViewModel;
 
 public partial class BrowserItemComponentViewModel : ObservableObject
 {
     [ObservableProperty]
-    private string? _title;
-
+    private string? _title = "Загрузка...";
+    public string BrowserTitle
+    {
+        get => Title;
+        set
+        {
+            if (value is not null && value.Length > 15)
+            {
+                value = value.Remove(12);
+                value += "...";
+            }
+            Title = value;
+        }
+    }
 
     [ObservableProperty]
     private string? _url;
 
-    //[ObservableProperty]
-
+    [ObservableProperty]
     private IWpfWebBrowser _webBrowser;
 
-    public IWpfWebBrowser WebBrowser
-    {
-        get => _webBrowser;
-        set
-        {
-            if (value is not null)
-            {
-                /*CustomLifeSpanHandler lifespanHandler = new CustomLifeSpanHandler();
-                lifespanHandler.Popup += Linked;*/
-                value.LifeSpanHandler = mainLifeSpanHandler;
-            }
+    public Guid Id { get; private set; }
 
-            _webBrowser = value;
-            OnPropertyChanged();
 
-            
-        }
-    }
-
-    private CustomLifeSpanHandler mainLifeSpanHandler = new CustomLifeSpanHandler();
-    public BrowserItemComponentViewModel(string url)
+    public BrowserItemComponentViewModel(BrowserTabModel browserTab, ILifeSpanHandler lifeSpanHandler)
     {
-        Url = url;
-    }
-    public BrowserItemComponentViewModel(string url, CustomLifeSpanHandler lifeSpanHandler)
-    {
-        Url = url;
+        Url = browserTab.Url;
         mainLifeSpanHandler = lifeSpanHandler;
+        isFavorite = browserTab.IsFavorite;
+        Id = browserTab.Id;
     }
 
-    public BaseCommand TestCommand
+    public RelayCommand BackCommand
     {
-        get => new BaseCommand((obj) =>
+        get => new RelayCommand(() =>
+        {
+            WebBrowser.Back();
+        });
+    }
+    public RelayCommand ReloadCommand
+    {
+        get => new RelayCommand(() =>
+        {
+            WebBrowser.Reload();
+        });
+    }
+    public RelayCommand ForwardCommand
+    {
+        get => new RelayCommand(() =>
+        {
+            WebBrowser.Forward();
+        });
+    }
+    public RelayCommand FavoriteCommand
+    {
+        get => new RelayCommand(() =>
         {
 
-
+        });
+    }
+    public RelayCommand HomeCommand
+    {
+        get => new RelayCommand(() =>
+        {
+        });
+    }
+    public RelayCommand CloseCommand
+    {
+        get => new RelayCommand(() =>
+        {
+            Closed?.Invoke(this, Id);
         });
     }
 
     public event EventHandler<LinkedEventArgs> Linked;
+    public event EventHandler<Guid> Closed;
+    public event EventHandler<bool> FavoriteToggle;
+
+
+    private ILifeSpanHandler mainLifeSpanHandler;
+    private bool isFavorite;
+
+    partial void OnWebBrowserChanged(IWpfWebBrowser value)
+    {
+        if (value is not null)
+        {
+            value.LifeSpanHandler = mainLifeSpanHandler;
+        }
+        _webBrowser = value;
+        OnPropertyChanged();
+    }
 }

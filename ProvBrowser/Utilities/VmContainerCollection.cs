@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace ProvBrowser.Utilities
 {
@@ -37,10 +38,15 @@ namespace ProvBrowser.Utilities
 
         public void AddContainer(VmContainer vmContainer)
         {
-            ViewModels.Add(vmContainer.ViewModel);
-            Views.Add(vmContainer.View);
+            Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
 
-            CollectionChanged?.Invoke(this, EventArgs.Empty);
+            dispatcher.Invoke(new Action(() =>
+            {
+                ViewModels.Add(vmContainer.ViewModel);
+                Views.Add(vmContainer.View);
+
+                CollectionChanged?.Invoke(this, EventArgs.Empty);
+            }));
         }
 
         public event EventHandler CollectionChanged;

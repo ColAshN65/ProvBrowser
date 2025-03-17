@@ -18,7 +18,7 @@
         <Grid Margin="1,1,1,1">
             
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="250"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             
@@ -27,24 +27,40 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button  Grid.Column="0" Command="{Binding WebBrowser.BackCommand}" Style="{DynamicResource btnControl}" Margin="0,0,1,0">
+                <Button Grid.Column="0" 
+                        Command="{Binding BackCommand}" 
+                        Style="{StaticResource btnControl}" Margin="0,0,1,0">
                     <Image Source="pack://application:,,,/Resources/arrow_right.png"/>
                 </Button>
-                <Button Grid.Column="1" Style="{DynamicResource btnControl}" Margin="1,0,1,0" Command="{Binding TestCommand}" >
+                <Button Grid.Column="1" 
+                        Command="{Binding ReloadCommand}"
+                        Style="{StaticResource btnControl}" Margin="1,0,1,0"  >
 
                 </Button>
-                <Button Grid.Column="2" Command="{Binding WebBrowser.ForwardCommand}" Style="{DynamicResource btnControl}" Margin="1,0,1,0" >
+                <Button Grid.Column="2" 
+                        Command="{Binding ForwardCommand}" 
+                        Style="{StaticResource btnControl}" Margin="1,0,1,0" >
                     <Image Source="pack://application:,,,/Resources/arrow_left.png"/>
                 </Button>
+                <Button Grid.Column="3" 
+                        Command="{Binding ForwardCommand}" 
+                        Style="{StaticResource btnControl}" Margin="1,0,1,0" >
+                </Button>
+                <Button Grid.Column="4" 
+                        Command="{Binding ForwardCommand}" 
+                        Style="{StaticResource btnControl}" Margin="1,0,1,0" >
+                </Button>
             </Grid>
-            <TextBox x:Name="UrlTextBox" Grid.Column="1" Text="{Binding Url, UpdateSourceTrigger=Explicit}" Style="{DynamicResource tbxStandart}">
+            <TextBox x:Name="UrlTextBox" Grid.Column="1" Text="{Binding Url, UpdateSourceTrigger=Explicit}" >
             </TextBox>
         </Grid>
 
         <Grid Grid.Row="1" Margin="2,1,2,1">
             <cef:ChromiumWebBrowser Address="{Binding Url, Mode=TwoWay}"
-                                Title="{Binding Title, Mode=OneWayToSource}"
+                                Title="{Binding BrowserTitle, Mode=OneWayToSource}"
                                 WebBrowser="{Binding WebBrowser, Mode=OneWayToSource}"
                                 >
             </cef:ChromiumWebBrowser>

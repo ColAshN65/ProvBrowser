@@ -6,6 +6,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/WpfLibrary;component/Styles/MainDictionary.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/WpfLibrary;component/Styles/TitleBarDictionary.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/WpfLibrary;component/Styles/TabDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

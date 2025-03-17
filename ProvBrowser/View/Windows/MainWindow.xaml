@@ -13,7 +13,7 @@
         
         xmlns:vm="clr-namespace:ProvBrowser.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Style="{DynamicResource windowStandart}" BorderThickness="0">
+        Title="MainWindow" BorderThickness="0" Style="{StaticResource windowStandart}">
     
 
     <Grid>

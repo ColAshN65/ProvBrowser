@@ -17,10 +17,10 @@ public partial class MainScreenViewModel : ObservableObject
     [ObservableProperty]
     private VmContainer? _mainContent;
 
-    public MainScreenViewModel()
+    public MainScreenViewModel(BrowsersTabComponentViewModel browsersTabViewModel)
     {
         MainContent = new VmContainer(
             new BrowsersTabComponent(),
-            new BrowsersTabComponentViewModel());
+            browsersTabViewModel);
     }
 }
