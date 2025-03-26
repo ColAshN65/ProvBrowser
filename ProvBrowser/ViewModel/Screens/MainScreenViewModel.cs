@@ -15,12 +15,10 @@ namespace ProvBrowser.ViewModel.Screens;
 public partial class MainScreenViewModel : ObservableObject
 {
     [ObservableProperty]
-    private VmContainer? _mainContent;
+    private ObservableObject _mainViewModel;
 
     public MainScreenViewModel(BrowsersTabComponentViewModel browsersTabViewModel)
-    {
-        MainContent = new VmContainer(
-            new BrowsersTabComponent(),
-            browsersTabViewModel);
+    { 
+        MainViewModel = browsersTabViewModel;
     }
 }

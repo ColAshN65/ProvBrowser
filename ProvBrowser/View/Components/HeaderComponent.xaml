@@ -12,6 +12,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
         
         <Border Background="#FF1E1E1E" BorderBrush="Gray" BorderThickness="1">
@@ -28,9 +29,15 @@
                 Style="{StaticResource btnHide}"
                 Click="btnHide_Click"
                 Content="–" FontSize="18"/>
-        
-        <Button x:Name="btnClose"
+
+        <Button x:Name="btnResize"
                 Grid.Column="2"
+                Style="{StaticResource btnControl}"
+                Click="btnResize_Click"
+        >[ ]</Button>
+
+        <Button x:Name="btnClose"
+                Grid.Column="3"
                 Style="{StaticResource btnClose}"
                 Click="btnClose_Click"
                 >X</Button>

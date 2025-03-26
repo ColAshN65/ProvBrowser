@@ -27,12 +27,5 @@ public partial class App : Application
         base.OnStartup(e);
     }
 
-    /*void LoadResources()
-    {
-        this.Resources = new ResourceDictionary();
 
-        this.Resources.MergedDictionaries.Add(
-            new ResourceDictionary()
-            { Source = new Uri("pack://application:,,,/WpfLibrary;component/Styles/MainDictionary.xaml") });
-    }*/
 }

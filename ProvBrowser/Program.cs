@@ -8,6 +8,10 @@ using ProvBrowser.ViewModel.Screens;
 using ProvBrowser.View.Components;
 using ProvBrowser.ViewModel.Components;
 using ProvBrowser.Services.Browser;
+using System.Reflection;
+using WpfLibrary.Navigation;
+using WpfLibrary.Navigation.Default;
+using ProvBrowser.Builders;
 
 namespace ProvBrowser;
 
@@ -16,6 +20,8 @@ public class Program
     [STAThread]
     public static void Main()
     {
+        NavigationControl.NavigationService = MainNavigationServiceBuilder.BuildService();
+
         MainDispatcherService mainDispatcherService = new MainDispatcherService(Dispatcher.CurrentDispatcher);
         MainTabManagerService mainTabManagerService = new MainTabManagerService();
 

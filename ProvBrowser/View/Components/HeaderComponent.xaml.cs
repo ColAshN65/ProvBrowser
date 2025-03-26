@@ -42,6 +42,13 @@ namespace ProvBrowser.View.Components
 
 
         }
+        private void btnResize_Click(object sender, RoutedEventArgs e)
+        {
+            if(ParentWindow.WindowState == WindowState.Normal)
+                ParentWindow.WindowState = WindowState.Maximized;
+            else
+                ParentWindow.WindowState = WindowState.Normal;
+        }
         private void btnHide_Click(object sender, RoutedEventArgs e)
         {
             ParentWindow.WindowState = WindowState.Minimized;
