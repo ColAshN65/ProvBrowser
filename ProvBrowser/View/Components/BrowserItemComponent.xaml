@@ -44,7 +44,10 @@
                     <Image Source="pack://application:,,,/Resources/arrow_left.png"/>
                 </Button>
             </Grid>
-            <TextBox x:Name="UrlTextBox" Grid.Column="1" Text="{Binding Url, UpdateSourceTrigger=Explicit}" >
+            <TextBox x:Name="UrlTextBox" 
+                     Grid.Column="1" 
+                     Text="{Binding Url, UpdateSourceTrigger=Explicit}" 
+                     KeyDown="TextBox_KeyEnterUpdate">
             </TextBox>
         </Grid>
 
