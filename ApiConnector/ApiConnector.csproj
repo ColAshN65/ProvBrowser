@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CefSharp.Wpf.NETCore" Version="135.0.170" />
-  </ItemGroup>
-
 </Project>

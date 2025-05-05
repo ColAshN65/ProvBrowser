@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using WpfLibrary.Navigation;
 using WpfLibrary.Navigation.Builders;
 using WpfLibrary.Navigation.Default;
 
 namespace ProvBrowser.Builders;
 
-public class MainNavigationServiceBuilder
+public static class MainNavigationServiceBuilder
 {
     public static DynamicNavigationSettings BuildSettings()
     {

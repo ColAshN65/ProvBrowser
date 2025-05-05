@@ -3,15 +3,20 @@
 
 
 
+    
     <SolidColorBrush x:Key="MainForegroundColor" Color="White"/>
     <SolidColorBrush x:Key="InteractiveForegroundColor" Color="#3f51b5"/>
 
-
-    <SolidColorBrush x:Key="FirstBackfroundColor" Color="#FF1E1E1E"/>
-    <SolidColorBrush x:Key="SecondBackfroundColor" Color="#FF2E2E2E"/>
+    
+    <SolidColorBrush x:Key="FirstBackfroundColor" Color="#1E1E1E"/>
+    <SolidColorBrush x:Key="SecondBackfroundColor" Color="#2E2E2E"/>
     <SolidColorBrush x:Key="EffectBackfroundColor" Color="#01041a"/>
 
+    
+    <SolidColorBrush x:Key="WarningForegroundColor" Color="Yellow"/>
+    <SolidColorBrush x:Key="WarningEffectBackfroundColor" Color="#404021"/>
 
 
-
+    <SolidColorBrush x:Key="CriticalForegroundColor" Color="Red"/>
+    <SolidColorBrush x:Key="CriticalEffectBackfroundColor" Color="#3b1c1a"/>
 </ResourceDictionary>

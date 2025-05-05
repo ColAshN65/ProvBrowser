@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using ProvBrowser.View.Windows;
 using ProvBrowser.ViewModel.Windows;
-using ProvBrowser.Services.Threading;
 using System.Windows.Threading;
 using ProvBrowser.ViewModel.Screens;
 using ProvBrowser.View.Components;
@@ -12,6 +11,8 @@ using System.Reflection;
 using WpfLibrary.Navigation;
 using WpfLibrary.Navigation.Default;
 using ProvBrowser.Builders;
+using Services.Threading;
+using Services.Threading.Base;
 
 namespace ProvBrowser;
 
@@ -28,6 +29,12 @@ public class Program
         var host = Host.CreateDefaultBuilder()
             .ConfigureServices(services =>
             {
+                services.BuildRecognizingConfiguration();
+                services.BuildBrowserCoreConfiguration();
+                
+                services.AddSingleton<IDispatcherService>(mainDispatcherService);
+                services.AddSingleton<ITabManagerService>(mainTabManagerService);
+
                 services.AddSingleton<App>();
 
                 services.AddSingleton<MainWindowViewModel>();
@@ -35,9 +42,6 @@ public class Program
                 services.AddSingleton<MainScreenViewModel>();
 
                 services.AddSingleton<BrowsersTabComponentViewModel>();
-
-                services.AddSingleton<IDispatcherService>(mainDispatcherService);
-                services.AddSingleton<ITabManagerService>(mainTabManagerService);
             })
             .Build();
 

@@ -1,9 +1,12 @@
 ﻿using BrowserCore.Eventargs;
+using BrowserCore.Services.SearchEngine.Base;
 using CefSharp;
 using CefSharp.Wpf;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ProvBrowser.Model.Browser;
+using Services.Audio.Base;
+using Services.Transcribing.Base;
 
 namespace ProvBrowser.ViewModel;
 
@@ -33,9 +36,16 @@ public partial class BrowserItemComponentViewModel : ObservableObject
 
     public Guid Id { get; private set; }
 
-
-    public BrowserItemComponentViewModel(BrowserTabModel browserTab, ILifeSpanHandler lifeSpanHandler)
+    public BrowserItemComponentViewModel(
+        IRecordingService recordingService, ITranscribationService transcribationService,
+        ISearchEngineProviderService engineProviderService,
+        BrowserTabModel browserTab, ILifeSpanHandler lifeSpanHandler)
     {
+        this.recordingService = recordingService;
+        this.transcribationService = transcribationService;
+
+        this.engineProviderService = engineProviderService;
+
         Url = browserTab.Url;
         mainLifeSpanHandler = lifeSpanHandler;
         isFavorite = browserTab.IsFavorite;
@@ -84,12 +94,40 @@ public partial class BrowserItemComponentViewModel : ObservableObject
         });
     }
 
+    public RelayCommand RecordCommand
+    {
+        get => new RelayCommand(StartRecord);
+    }
+    public RelayCommand RecordStopCommand
+    {
+        get => new RelayCommand(StopRecord);
+    }
+
+    private async void StopRecord()
+    {
+        recordingService.StopRecording();
+        var result = await transcribationService.SpeechToTextAsync();
+        if(result.IsSuccess)
+            Url = engineProviderService.GetSearchPageUrl(result.Text);
+    }
+    
+
+    private void StartRecord()
+    {
+        recordingService.StartRecording();
+    }
+
     public event EventHandler<LinkedEventArgs> Linked;
     public event EventHandler<Guid> Closed;
     public event EventHandler<bool> FavoriteToggle;
 
 
-    private ILifeSpanHandler mainLifeSpanHandler;
+    private readonly IRecordingService recordingService;
+    private readonly ITranscribationService transcribationService;
+
+    private readonly ISearchEngineProviderService engineProviderService;
+
+    private readonly ILifeSpanHandler mainLifeSpanHandler;
     private bool isFavorite;
 
     partial void OnWebBrowserChanged(IWpfWebBrowser value)
