@@ -37,13 +37,13 @@ public partial class BrowserItemComponentViewModel : ObservableObject
     public Guid Id { get; private set; }
 
     public BrowserItemComponentViewModel(
-        IRecordingService recordingService, ITranscribationService transcribationService,
+        IRecordingService recordingService, 
+        ITranscribationService transcribationService,
         ISearchEngineProviderService engineProviderService,
         BrowserTabModel browserTab, ILifeSpanHandler lifeSpanHandler)
     {
         this.recordingService = recordingService;
         this.transcribationService = transcribationService;
-
         this.engineProviderService = engineProviderService;
 
         Url = browserTab.Url;

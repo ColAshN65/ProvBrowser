@@ -13,6 +13,8 @@ using WpfLibrary.Navigation.Default;
 using ProvBrowser.Builders;
 using Services.Threading;
 using Services.Threading.Base;
+using ProvBrowser.Services.Notification;
+using Services.Notification.Base;
 
 namespace ProvBrowser;
 
@@ -25,13 +27,15 @@ public class Program
 
         MainDispatcherService mainDispatcherService = new MainDispatcherService(Dispatcher.CurrentDispatcher);
         MainTabManagerService mainTabManagerService = new MainTabManagerService();
+        var notificationService = new MessageBoxNotificationService();
 
         var host = Host.CreateDefaultBuilder()
             .ConfigureServices(services =>
             {
-                services.BuildRecognizingConfiguration();
+                services.BuildRecognizingConfiguration(notificationService);
                 services.BuildBrowserCoreConfiguration();
-                
+
+                services.AddSingleton<INotificationService>(notificationService);
                 services.AddSingleton<IDispatcherService>(mainDispatcherService);
                 services.AddSingleton<ITabManagerService>(mainTabManagerService);
 
@@ -52,7 +56,15 @@ public class Program
 
         app.Initialize(host.Services.GetService<MainWindowViewModel>());
 
-        // запускаем приложения
-        app?.Run();
+        try
+        {
+            // запускаем приложения
+            app?.Run();
+        }
+        catch (Exception ex)
+        {
+            notificationService.NotifyException("Возникло нобработанное исключение в программе!", ex);
+        }
+        
     }
 }

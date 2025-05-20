@@ -11,15 +11,13 @@ namespace ProvBrowser.Builders;
 
 public static class RecognizingConfiguration
 {
-    public static IServiceCollection BuildRecognizingConfiguration(this IServiceCollection services)
+    public static IServiceCollection BuildRecognizingConfiguration(this IServiceCollection services, INotificationService notificationService)
     {
         string cacheFilePath = "RecordResult.wav";
 
-        var notificationService = new MessageBoxNotificationService();
         var nAudioRecordingService = new NAudioRecordingService(notificationService, cacheFilePath);
         var transcribationService = new AssemblyUiTranscribationService(notificationService, new AssemblyUiApiService(), cacheFilePath);
-
-        services.AddSingleton<INotificationService>(notificationService);    
+   
         services.AddSingleton<IRecordingService>(nAudioRecordingService);
         services.AddSingleton<ITranscribationService>(transcribationService);
 

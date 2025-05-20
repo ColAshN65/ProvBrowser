@@ -23,9 +23,9 @@ public class MessageBoxNotificationService : INotificationService
     public void NotifyException(string message, Exception ex)
     {
         MessageBox.Show(message + "\n\nException info:\n" +
-            $"Source: {ex.Source}" +
-            $"Message: {ex.Message}" +
-            $"Data: {ex.Data.ToString()}",
+            $"Source: {ex.Source}\n" +
+            $"Message: {ex.Message}\n" +
+            $"Data: {ex.Data.ToString()}\n",
             "Ошибка",
             MessageBoxButton.OK, MessageBoxImage.Error);
     }

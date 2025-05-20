@@ -97,12 +97,10 @@ public partial class BrowsersTabComponentViewModel : ObservableObject
                 = new BrowserItemComponentViewModel(recordingService, transcribationService, engineProviderService, browserTabModel, lifeSpanHandler);
 
             browserItemComponentViewModel.Closed += ItemClosed;
-
             browserItemComponent.DataContext = browserItemComponentViewModel;
-            BrowsersTabs.Insert(BrowsersTabs.Count - 1, browserItemComponent);
 
+            BrowsersTabs.Insert(BrowsersTabs.Count - 1, browserItemComponent);
             SelectedIndex = BrowsersTabs.Count - 2;
-            
         }));
     }
 
