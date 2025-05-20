@@ -1,7 +1,7 @@
 ﻿using System.Windows.Threading;
-using Services.Threading.Base;
+using WpfLibrary.Services.Threading.Base;
 
-namespace Services.Threading;
+namespace WpfLibrary.Services.Threading;
 
 public class MainDispatcherService : IDispatcherService
 {

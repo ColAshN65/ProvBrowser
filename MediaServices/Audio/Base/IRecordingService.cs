@@ -1,8 +1,8 @@
-﻿namespace Services.Audio.Base;
+﻿namespace WPFMediaServices.Audio.Base;
 
 public interface IRecordingService
 {
-    string GetRecordPath();
     void StartRecording();
     void StopRecording();
+    string GetRecordPath();
 }

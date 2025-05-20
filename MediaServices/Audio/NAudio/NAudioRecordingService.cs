@@ -2,8 +2,8 @@
 using NAudio.FileFormats;
 using NAudio.CoreAudioApi;
 using NAudio;
-using Services.Audio.Base;
-using Services.Notification.Base;
+using WPFMediaServices.Audio.Base;
+using SupportServices.Notification.Base;
 
 namespace Services.Audio;
 

@@ -1,11 +1,10 @@
 ﻿using ApiConnector.AssemblyUi.Services;
+using FeatureServices.Transcribing;
+using FeatureServices.Transcribing.Base;
 using Microsoft.Extensions.DependencyInjection;
-using ProvBrowser.Services.Notification;
 using Services.Audio;
-using Services.Audio.Base;
-using Services.Notification.Base;
-using Services.Transcribing;
-using Services.Transcribing.Base;
+using SupportServices.Notification.Base;
+using WPFMediaServices.Audio.Base;
 
 namespace ProvBrowser.Builders;
 

@@ -1,7 +1,7 @@
-﻿using Services.Notification.Base;
+﻿using SupportServices.Notification.Base;
 using System.Diagnostics;
 
-namespace Services.Notification;
+namespace SupportServices.Notification;
 
 public class DebugNotificationService : INotificationService
 {

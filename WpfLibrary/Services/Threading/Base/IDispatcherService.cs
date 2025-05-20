@@ -1,4 +1,4 @@
-﻿namespace Services.Threading.Base;
+﻿namespace WpfLibrary.Services.Threading.Base;
 
 /// <summary>
 ///     Сервис, позволяющий взаимодействовать с записанным потоком диспетчера.

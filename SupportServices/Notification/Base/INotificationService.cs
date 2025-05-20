@@ -1,4 +1,4 @@
-﻿namespace Services.Notification.Base;
+﻿namespace SupportServices.Notification.Base;
 
 public interface INotificationService
 {

@@ -1,20 +1,16 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using ProvBrowser.View.Windows;
 using ProvBrowser.ViewModel.Windows;
 using System.Windows.Threading;
 using ProvBrowser.ViewModel.Screens;
-using ProvBrowser.View.Components;
 using ProvBrowser.ViewModel.Components;
 using ProvBrowser.Services.Browser;
-using System.Reflection;
 using WpfLibrary.Navigation;
-using WpfLibrary.Navigation.Default;
 using ProvBrowser.Builders;
-using Services.Threading;
-using Services.Threading.Base;
-using ProvBrowser.Services.Notification;
-using Services.Notification.Base;
+using WpfLibrary.Services.Threading;
+using SupportServices.Notification.Base;
+using WpfLibrary.Services.Threading.Base;
+using WpfLibrary.Services.Notification;
 
 namespace ProvBrowser;
 

@@ -1,8 +1,7 @@
-﻿using Services.Notification.Base;
-using System.Diagnostics;
+﻿using SupportServices.Notification.Base;
 using System.Windows;
 
-namespace ProvBrowser.Services.Notification;
+namespace WpfLibrary.Services.Notification;
 
 public class MessageBoxNotificationService : INotificationService
 {
