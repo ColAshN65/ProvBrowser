@@ -1,28 +1,23 @@
 ﻿using NAudio.Wave;
-using NAudio.FileFormats;
-using NAudio.CoreAudioApi;
-using NAudio;
 using WPFMediaServices.Audio.Base;
 using SupportServices.Notification.Base;
+using SupportServices.FileManager.Base;
 
 namespace Services.Audio;
 
 public class NAudioRecordingService : IRecordingService
 {
-    public NAudioRecordingService(INotificationService notificationService, string outputFilename)
+    public NAudioRecordingService(INotificationService notificationService, IFileManagerService fileManagerService, Guid fileId)
     {
-        this.outputFilename = outputFilename;
-    }
-    private void OnAsioOutAudioAvailable(object? sender, AsioAudioAvailableEventArgs e)
-    {
-        throw new NotImplementedException();
+        this.notificationService = notificationService;
+        this.fileManagerService = fileManagerService;
+        this.fileId = fileId;
     }
 
     public void StartRecording()
     { 
         waveIn = new WaveIn();
-        //Дефолтное устройство для записи (если оно имеется)
-        //встроенный микрофон ноутбука имеет номер 0
+        //Встроенный микрофон имеет номер 0
         waveIn.DeviceNumber = 0;
         //Прикрепляем к событию DataAvailable обработчик, возникающий при наличии записываемых данных
         waveIn.DataAvailable += waveIn_DataAvailable;
@@ -30,8 +25,8 @@ public class NAudioRecordingService : IRecordingService
         waveIn.RecordingStopped += waveIn_RecordingStopped;
         //Формат wav-файла - принимает параметры - частоту дискретизации и количество каналов(здесь mono)
         waveIn.WaveFormat = new WaveFormat(8000, 1);
-        //Инициализируем объект WaveFileWriter
-        writer = new WaveFileWriter(outputFilename, waveIn.WaveFormat);
+
+        writer = new WaveFileWriter(GetRecordPath(), waveIn.WaveFormat);
         //Начало записи
         waveIn.StartRecording();
     }
@@ -42,40 +37,48 @@ public class NAudioRecordingService : IRecordingService
         {
             waveIn.StopRecording();
             waveIn.Dispose();
-
             writer.Close();
             writer.Dispose();
+            writer = null;
         }
     }
-
+    public string GetFileName()
+        => $"AudioRecord_{fileId}.wav";
     public string GetRecordPath()
-        => outputFilename;
+        => $"{fileManagerService.GetPath()}/{GetFileName()}";
 
     //Получение данных из входного буфера 
     void waveIn_DataAvailable(object sender, WaveInEventArgs e)
     {
-        //Записываем данные из буфера в файл
-        writer.WriteData(e.Buffer, 0, e.BytesRecorded);
+        
+        writer.Write(e.Buffer, 0, e.BytesRecorded);
+
+        //fileManagerService.WriteFile(GetFileName(), e.Buffer, 0, e.BytesRecorded);
     }
 
+    
+
     private INotificationService notificationService;
+    private IFileManagerService fileManagerService;
 
     // WaveIn - поток для записи
     private WaveRecorder waveRecorder;
     private WaveIn waveIn;
+
     //Класс для записи в файл
     private WaveFileWriter writer;
 
-
-    //Имя файла для записи
-    private readonly string outputFilename;
+    private readonly Guid fileId;
 
     //Окончание записи
     private void waveIn_RecordingStopped(object sender, EventArgs e)
     {
         waveIn.Dispose();
         waveIn = null;
-        writer.Close();
-        writer = null;
+    }
+
+    public void Dispose()
+    {
+        StopRecording();
     }
 }

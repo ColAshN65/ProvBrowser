@@ -8,10 +8,7 @@
         
         xmlns:comps="clr-namespace:ProvBrowser.View.Components"
         
-        xmlns:ns="clr-namespace:ProvBrowser.Utilities"
-        xmlns:nav="clr-namespace:MVVM.Core.Locators;assembly=MVVM.Core"
-        
-        xmlns:vm="clr-namespace:ProvBrowser.ViewModel"
+        xmlns:nav="clr-namespace:WpfLibrary.Navigation;assembly=WpfLibrary"
         mc:Ignorable="d"
         Title="MainWindow" BorderThickness="0" Style="{StaticResource windowStandart}">
     
@@ -24,8 +21,8 @@
 
         <comps:HeaderComponent x:Name="MainHeader"/>
 
-        <UserControl Grid.Row="1" DataContext="{Binding Screen}" Content="{Binding View}">
+        <nav:NavigationControl Grid.Row="1" DataContext="{Binding ScreenViewModel}" Content="{Binding View}">
 
-        </UserControl>
+        </nav:NavigationControl>
     </Grid>
 </Window>

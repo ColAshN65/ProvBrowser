@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using ProvBrowser.View.Windows;
+using ProvBrowser.ViewModel.Windows;
+using System.Reflection;
 using WpfLibrary.Navigation;
 using WpfLibrary.Navigation.Builders;
 using WpfLibrary.Navigation.Default;
@@ -17,8 +19,8 @@ public static class MainNavigationServiceBuilder
             "",
             "ViewModel",
             //Сборки, в которых находятся View и ViewModel.
-            Assembly.GetExecutingAssembly(),
-            Assembly.GetExecutingAssembly());
+            Assembly.GetAssembly(typeof(MainWindow)),
+            Assembly.GetAssembly(typeof(MainWindowViewModel)));
     }
 
     public static INavigationService BuildService()

@@ -8,20 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CefSharp.Wpf.NETCore" Version="135.0.170" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Components\AddTabitemComponent.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Components\BrowserItemComponent.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <ProjectReference Include="..\WpfLibrary\WpfLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Components\BrowsersTabComponent.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProvBrowser.View.Components
+namespace ProvBrowser.View.Components.TabItems
 {
     /// <summary>
     /// Логика взаимодействия для AddTabitemComponent.xaml
@@ -24,7 +24,5 @@ namespace ProvBrowser.View.Components
         {
             InitializeComponent();
         }
-
-        
     }
 }

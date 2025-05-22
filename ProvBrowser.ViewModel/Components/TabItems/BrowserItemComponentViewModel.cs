@@ -1,16 +1,16 @@
 ﻿using BrowserCore.Eventargs;
+using BrowserCore.Model;
 using BrowserCore.Services.SearchEngine.Base;
 using CefSharp;
 using CefSharp.Wpf;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ProvBrowser.Model.Browser;
-using Services.Audio.Base;
-using Services.Transcribing.Base;
+using FeatureServices.Transcribing.Base;
+using WPFMediaServices.Audio.Base;
 
-namespace ProvBrowser.ViewModel;
+namespace ProvBrowser.ViewModel.Components.TabItems;
 
-public partial class BrowserItemComponentViewModel : ObservableObject
+public partial class BrowserItemComponentViewModel : ObservableObject, IDisposable
 {
     [ObservableProperty]
     private string? _title = "Загрузка...";
@@ -38,7 +38,7 @@ public partial class BrowserItemComponentViewModel : ObservableObject
 
     public BrowserItemComponentViewModel(
         IRecordingService recordingService, 
-        ITranscribationService transcribationService,
+        IFileTranscribationService transcribationService,
         ISearchEngineProviderService engineProviderService,
         BrowserTabModel browserTab, ILifeSpanHandler lifeSpanHandler)
     {
@@ -106,7 +106,7 @@ public partial class BrowserItemComponentViewModel : ObservableObject
     private async void StopRecord()
     {
         recordingService.StopRecording();
-        var result = await transcribationService.SpeechToTextAsync();
+        var result = await transcribationService.SpeechToTextAsync(recordingService.GetFileName());
         if(result.IsSuccess)
             Url = engineProviderService.GetSearchPageUrl(result.Text);
     }
@@ -123,10 +123,8 @@ public partial class BrowserItemComponentViewModel : ObservableObject
 
 
     private readonly IRecordingService recordingService;
-    private readonly ITranscribationService transcribationService;
-
+    private readonly IFileTranscribationService transcribationService;
     private readonly ISearchEngineProviderService engineProviderService;
-
     private readonly ILifeSpanHandler mainLifeSpanHandler;
     private bool isFavorite;
 
@@ -138,5 +136,14 @@ public partial class BrowserItemComponentViewModel : ObservableObject
         }
         _webBrowser = value;
         OnPropertyChanged();
+    }
+
+    public void Dispose()
+    {
+        Linked = null;
+        Closed = null;
+        FavoriteToggle = null;
+
+        recordingService?.Dispose();
     }
 }

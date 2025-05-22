@@ -1,11 +1,6 @@
-﻿using ProvBrowser.Model.Browser;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BrowserCore.Model;
 
-namespace ProvBrowser.Services.Browser;
+namespace BrowserCore.Services.TabManager.Base;
 
 public interface ITabManagerService
 {

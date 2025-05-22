@@ -26,17 +26,19 @@ namespace BrowserCore.Handlers
 
         }
 
-        bool ILifeSpanHandler.OnBeforePopup(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, string targetUrl, string targetFrameName, WindowOpenDisposition targetDisposition, bool userGesture, IPopupFeatures popupFeatures, IWindowInfo windowInfo, IBrowserSettings browserSettings, ref bool noJavascriptAccess, out IWebBrowser newBrowser)
+        bool ILifeSpanHandler.OnBeforePopup(IWebBrowser chromiumWebBrowser,
+            IBrowser browser, IFrame frame, string targetUrl, string targetFrameName,
+            WindowOpenDisposition targetDisposition, bool userGesture, IPopupFeatures popupFeatures,
+            IWindowInfo windowInfo, IBrowserSettings browserSettings, ref bool noJavascriptAccess, out IWebBrowser newBrowser)
         {
-
-            //Program.Form.Invoke(new Action(() => Program.Form.newPage(targetUrl)));
-
-            //browser.MainFrame.LoadUrl(targetUrl);
             Popup?.Invoke(this, new LinkedEventArgs(targetUrl));
             newBrowser = null;
             return true;
         }
 
+        /// <summary>
+        ///     Уведомление об открытии нового сайта.
+        /// </summary>
         public event EventHandler<LinkedEventArgs> Popup;
 
     }

@@ -3,6 +3,8 @@ using FeatureServices.Transcribing;
 using FeatureServices.Transcribing.Base;
 using Microsoft.Extensions.DependencyInjection;
 using Services.Audio;
+using SupportServices.FileManager;
+using SupportServices.FileManager.Base;
 using SupportServices.Notification.Base;
 using WPFMediaServices.Audio.Base;
 
@@ -10,15 +12,15 @@ namespace ProvBrowser.Builders;
 
 public static class RecognizingConfiguration
 {
-    public static IServiceCollection BuildRecognizingConfiguration(this IServiceCollection services, INotificationService notificationService)
+    public static IServiceCollection BuildRecognizingConfiguration(this IServiceCollection services, INotificationService notificationService, IFileManagerService fileManagerService)
     {
         string cacheFilePath = "RecordResult.wav";
 
-        var nAudioRecordingService = new NAudioRecordingService(notificationService, cacheFilePath);
-        var transcribationService = new AssemblyUiTranscribationService(notificationService, new AssemblyUiApiService(), cacheFilePath);
-   
-        services.AddSingleton<IRecordingService>(nAudioRecordingService);
-        services.AddSingleton<ITranscribationService>(transcribationService);
+        var audioServiceBuilder = new NAudioRecordingServiceBuilder(notificationService, fileManagerService);
+        var transcribationService = new AssemblyUiTranscribationService(notificationService, fileManagerService, new AssemblyUiApiService(), cacheFilePath);
+
+        services.AddSingleton(audioServiceBuilder);
+        services.AddSingleton<IFileTranscribationService>(transcribationService);
 
         return services;
     }
