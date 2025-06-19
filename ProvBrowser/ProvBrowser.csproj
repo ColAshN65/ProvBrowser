@@ -44,7 +44,6 @@
     <ProjectReference Include="..\BrowserCore\BrowserCore.csproj" />
     <ProjectReference Include="..\FeatureServices\FeatureServices.csproj" />
     <ProjectReference Include="..\MediaServices\WPFMediaServices.csproj" />
-    <ProjectReference Include="..\MVVM.Core\MVVM.Core.csproj" />
     <ProjectReference Include="..\ProvBrowser.ViewModel\ProvBrowser.ViewModel.csproj" />
     <ProjectReference Include="..\ProvBrowser.View\ProvBrowser.View.csproj" />
     <ProjectReference Include="..\SupportServices\SupportServices.csproj" />
